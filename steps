@@ -1,0 +1,44 @@
+Monitoring metrics RHSSO and Datagrid
+
+DATAGRID:
+
+1- PODS Memória
+
+kube_pod_resource_limit{namespace="datagrid-site-azure",resource="memory",pod=~"datagrid.+"}
+jvm_memory_bytes_max{namespace="datagrid-site-azure",area="heap",pod=~"datagrid.+"}
+jvm_memory_bytes_used{namespace="datagrid-site-azure",area="heap",pod=~"datagrid.+"}
+
+2- PODS CPU 
+kube_pod_resource_limit{namespace="datagrid-site-azure",resource="cpu",pod=~"datagrid.+"}
+pod:container_cpu_usage:sum{namespace="datagrid-site-azure",pod=~"datagrid.+"}
+
+3- PODS Threads
+container_threads_max{namespace="datagrid-site-azure",container="datagrid-service-xsite-hello-world",pod=~"datagrid.+"}
+jvm_threads_current{namespace="datagrid-site-azure",pod=~"datagrid.+"}
+
+4- NODES Memoria
+machine_memory_bytes{node=~"worker.+"}
+### memoria disponivel
+node_memory_MemAvailable_bytes{instance=~"worker.+"}
+
+
+5- Number of entries
+datagrid_cluster_cache_stats{attribute="current_number_of_entries_in_memory",name="bancobv"}
+datagrid_cluster_cache_stats{attribute="number_of_entries",name="bancobv"}
+datagrid_cache_stats{attribute="number_of_entries",name="bancobv"}
+
+
+SSO:
+
+1- PODS MEMORIA
+kube_pod_resource_limit{namespace="datagrid-site-azure",resource="memory",pod=~"sso-.+"}
+base_memory_maxHeap_bytes{namespace="datagrid-site-azure",pod=~"sso-.+"}
+base_memory_usedHeap_bytes{namespace="datagrid-site-azure",pod=~"sso-.+"}
+
+2- PODS CPU 
+kube_pod_resource_limit{namespace="datagrid-site-azure",resource="cpu",pod=~"sso-.+"}
+pod:container_cpu_usage:sum{namespace="datagrid-site-azure",pod=~"sso-.+"}
+
+3- PODS THREADS
+base_thread_max_count{namespace="datagrid-site-azure",pod=~"sso-.+"}
+pod:container_cpu_usage:sum{namespace="datagrid-site-azure",pod=~"sso-.+"}
